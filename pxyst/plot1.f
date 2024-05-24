@@ -1,1 +1,1 @@
-../common/plot1.f
+INCLUDE "../common/plot1.f"

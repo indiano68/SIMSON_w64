@@ -1,1 +1,1 @@
-../bla/step.f
+INCLUDE "../bla/step.f"

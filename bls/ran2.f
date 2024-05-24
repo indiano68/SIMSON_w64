@@ -1,1 +1,1 @@
-../bla/ran2.f
+INCLUDE "../bla/ran2.f"

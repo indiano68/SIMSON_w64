@@ -1,1 +1,1 @@
-../bla/cvecfft_acc.f
+INCLUDE "../bla/cvecfft_acc.f"

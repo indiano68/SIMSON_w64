@@ -1,1 +1,1 @@
-../bla/dstep.f
+INCLUDE "../bla/dstep.f"

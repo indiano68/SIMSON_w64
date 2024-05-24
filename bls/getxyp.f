@@ -1,1 +1,1 @@
-../common/getxyp.f
+INCLUDE "../common/getxyp.f"

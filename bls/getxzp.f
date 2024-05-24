@@ -1,1 +1,1 @@
-../common/getxzp.f
+INCLUDE "../common/getxzp.f"

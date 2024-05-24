@@ -1,1 +1,1 @@
-../common/putxyp.f
+INCLUDE "../common/putxyp.f"

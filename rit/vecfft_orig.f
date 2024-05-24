@@ -1,1 +1,1 @@
-../bla/vecfft_orig.f
+INCLUDE "../bla/vecfft_orig.f"

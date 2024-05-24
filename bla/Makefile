@@ -250,23 +250,15 @@ ifeq "$(arch)" "Linux_PGI"
 	LIBS = 
 endif
 #  **********************************************************************
-
+#-fdefault-real-8
 ifeq "$(arch)" "Linux_gfortran"	
-	CFLAGS = -std=legacy -fdefault-real-8 -cpp -O3 -DLINUX_GFORTRAN
-	ifeq "$(mpi)" "yes"
-		FCC = mpif90
-		ifeq "$(omp)" "yes"
-			FC = $(FCC) $(CFLAGS) -openmp -DOPENMP -DMPI
-		else	
-			FC = $(FCC) $(CFLAGS) -DMPI #-DALLTOALL
-		endif
-	else	
-		FCC = gfortran
-		ifeq "$(omp)" "yes"
-			FC = $(FCC) $(CFLAGS) -fopenmp -DOPENMP
-		else
-			FC = $(FCC) $(CFLAGS) 
-		endif
+		CFLAGS = -std=legacy -fdefault-real-8 -cpp -O3 -DLINUX_GFORTRAN 
+		
+	FCC = gfortran
+	ifeq "$(omp)" "yes"
+		FC = $(FCC) $(CFLAGS) -fopenmp -DOPENMP  
+	else
+		FC = $(FCC) $(CFLAGS) 
 	endif
 	LIBS = 
 endif
@@ -331,16 +323,16 @@ endif
 prog: FIRST_ACTION $(PROG)
 
 $(PROG): $(obj) Makefile
-	@echo '***************************************'
+	@echo "***************************************"
 	@echo "** linking $(MODE) $@ on $(arch) with $(FCC)"
-	@echo '***************************************'
+	@echo "***************************************"
 	@rm -f $@
 	@$(FC) -o $@ $(obj) $(LIBS) $(ARPACK)
 
 %.o : %.f
-	@echo '***************************************'
+	@echo "***************************************"
 	@echo "** compiling $(MODE) $*.f on $(arch) with $(FCC)"
-	@echo '***************************************'
+	@echo "***************************************"
 	@$(FC) -c $*.f
 
 $(dep):	par.f
@@ -351,14 +343,19 @@ latest_revision: $(dep) $(idep)
 
 latest_revision: ppar.f
 
+info:
+	@echo "***************************************"
+	@echo "** linking $(MODE) $@ on $(arch) with $(FCC)"
+	@echo "***************************************"
+
 ppar.o : latest_revision
 
 .PHONY : clean new FIRST_ACTION 
 
 clean:
-	@echo '***************************************'
+	@echo "***************************************"
 	@echo "** clean up directory                **"
-	@echo '***************************************'
+	@echo "***************************************"
 	@rm -f *.o *.F bla wrapper
 	@rm -f *~ ifc* latest_revision
 
@@ -367,11 +364,11 @@ new: clean $(PROG)
 .SUFFIXES:
 
 FIRST_ACTION:
-	@tcsh -f -c 'echo \\033[1\;34m\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\\033[m\\017'
-	@tcsh -f -c 'echo \\033[1\;34m\*\* Updating $(PROG) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \*\*\\033[m\\017'
-	@tcsh -f -c 'echo \\033[1\;34m\*\* usage: make \[mpi=yes\]\[omp=yes\]\[arch=Linux\|Linux_PGI\|AIX\|BG\]]\[wrapper=yes\]\ \*\*\\033[m\\017'
-	@tcsh -f -c 'echo \\033[1\;34m\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\\033[m\\017'
-#	@echo '*************************************************'
-#	@echo "** Updating BLA                                **"
-#	@echo "** usage: make [mpi=yes][omp=yes][wrapper=yes] **"
-#	@echo '*************************************************'
+# @tcsh -f -c "echo \\033[1\;34m\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\\033[m\\017"
+# @tcsh -f -c "echo \\033[1\;34m\*\* Updating $(PROG) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \*\*\\033[m\\017"
+# @tcsh -f -c "echo \\033[1\;34m\*\* usage: make \[mpi=yes\]\[omp=yes\]\[arch=Linux\|Linux_PGI\|AIX\|BG\]]\[wrapper=yes\]\ \*\*\\033[m\\017"
+# @tcsh -f -c "echo \\033[1\;34m\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\\033[m\\017"
+	@echo "*************************************************"
+	@echo "** Updating BLA                                **"
+	@echo "** usage: make [mpi=yes][omp=yes][wrapper=yes] **"
+	@echo "*************************************************"

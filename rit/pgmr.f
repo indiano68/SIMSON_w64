@@ -1,1 +1,1 @@
-../common/pgmr.f
+INCLUDE "../common/pgmr.f"

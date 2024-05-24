@@ -1,1 +1,1 @@
-../bla/cubip.f
+INCLUDE "../bla/cubip.f"

@@ -1,1 +1,1 @@
-../common/wpgmr.f
+INCLUDE "../common/wpgmr.f"

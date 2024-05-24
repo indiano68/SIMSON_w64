@@ -1,1 +1,1 @@
-../bla/icheb.f
+INCLUDE "../bla/icheb.f"
