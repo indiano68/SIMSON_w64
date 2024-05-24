@@ -64,7 +64,7 @@ c
 c
 c     Main storage (distributed in z among the processors)
 c
-      ! real ur(memnx,memny,memnz,memnxyz),ui(memnx,memny,memnz,memnxyz)
+      real ur(memnx,memny,memnz,memnxyz),ui(memnx,memny,memnz,memnxyz)
 c
 c     In case of memory related problems, the following lines
 c     can be tried out:
@@ -73,9 +73,9 @@ c      common /MAIN/ ur,ui
 c
 c     static ur,ui
 c
-      real,allocatable :: ur(:,:,:,:),ui(:,:,:,:)
-      ! allocate(ur(memnx,memny,memnz,memnxyz))
-      ! allocate(ui(memnx,memny,memnz,memnxyz))
+c     real,allocatable :: ur(:,:,:,:),ui(:,:,:,:)
+c     allocate(ur(memnx,memny,memnz,memnxyz))
+c     allocate(ui(memnx,memny,memnz,memnxyz))
 c
 c
 c     Step 2 storage (nonlinbl)
@@ -607,9 +607,6 @@ c
 c     For MPI-2
 c      integer irequired,iprovided
 #endif
-
-      allocate(ur(memnx,memny,memnz,memnxyz))
-      allocate(ui(memnx,memny,memnz,memnxyz))
 
 c-----------------------------------
 c
