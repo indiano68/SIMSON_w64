@@ -76,6 +76,10 @@ dep_  = $(PROG).o $(start) $(read) $(write) $(stat) $(get) $(put) \
         $(les) $(fft) $(pressure) $(wallr) $(jet) $(3dbase) $(arpack)
 idep_ = $(diffint) $(solv) $(bl) $(mdep) $(corr) $(misc) $(spl)
 
+ifndef stack_size
+	stack_size=200000000
+endif
+
 ifeq "$(wrapper)" "yes"
 	dep_ += $(wrapperdep)
 endif
@@ -256,7 +260,7 @@ ifeq "$(arch)" "Linux_gfortran"
 		
 	FCC = gfortran
 	ifeq "$(omp)" "yes"
-		FC = $(FCC) $(CFLAGS) -fopenmp -DOPENMP  
+		FC = $(FCC) $(CFLAGS) -fopenmp -DOPENMP  -Wl,--stack,$(stack_size)
 	else
 		FC = $(FCC) $(CFLAGS) 
 	endif
